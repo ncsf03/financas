@@ -3,7 +3,7 @@ USE financas;
 
 CREATE TABLE usuarios(
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    saldo INT(0,00),
+    saldo DECIMAL(0,00),
     usuario VARCHAR(55) NOT NULL,
     senha VARCHAR(55) NOT NULL
 );
