@@ -27,7 +27,7 @@ CREATE TABLE gastos (
 CREATE TABLE transacoes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
-    tipo ENUM('entrada', saida) NOT NULL,
+    tipo ENUM('entrada', 'saida') NOT NULL,
     valor DECIMAL(10,2) NOT NULL,
     descricao VARCHAR(100),
     data_transacao DATETIME DEFAULT CURRENT_TIMESTAMP,

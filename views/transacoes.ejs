@@ -1,0 +1,36 @@
+<%- include('partials/header', {titulo: 'Minhas transações'}) %>
+
+<h2>Olá, <%= usuario.usuario %></h2>
+
+<form action="/transacoes" method="POST">
+  <select name="tipo" required>
+    <option value="entrada">Entrada</option>
+    <option value="saida">Saída</option>
+  </select>
+  <input type="number" step="0.01" name="valor" placeholder="Valor" required>
+  <input type="text" name="descricao" placeholder="Descrição (opcional)">
+  <button type="submit">Registrar</button>
+</form>
+
+<h3>Histórico de Transações</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Tipo</th>
+    <th>Valor</th>
+    <th>Descrição</th>
+    <th>Data</th>
+  </tr>
+  <% transacoes.forEach(t => { %>
+    <tr>
+      <td><%= t.tipo %></td>
+      <td>R$ <%= Number(t.valor).toFixed(2) %></td>
+      <td><%= t.descricao || '' %></td>
+      <td><%= new Date(t.data_transacao).toLocaleString() %></td>
+    </tr>
+  <% }) %>
+</table>
+
+<br>
+<a href="/logout">Sair</a>
+
+<%- include('partials/footer') %>
