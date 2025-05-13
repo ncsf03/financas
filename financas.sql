@@ -31,7 +31,7 @@ CREATE TABLE transacoes(
     valor DECIMAL(10,2) NOT NULL,
     descricao VARCHAR(100),
     data_transacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 INSERT INTO categorias (nome) VALUES
