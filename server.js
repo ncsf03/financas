@@ -45,6 +45,22 @@ app.post('/register', (req, res) => {
     })
 })
 
+app.post('/transacoes', (req, res) => {
+    const {tipo, valor, descricao} = req.body
+    const usuarioId = req.session.usuario.id
+    
+    const query = 'INSERT INTO transacoes (usuario_id, tipo, valor, descricao, data_transacao) VALUES(?, ?, ?, ?, NOW())'
+
+    db.query(query, [usuarioId, tipo, valor, descricao], (err) =>{
+        if (err) {
+            console.error(err)
+            return res.send('Erro ao salvar transação')
+        }
+
+        res.redirect('/transacoes')
+    })
+})
+
 app.get('/transacoes', (req, res) => {
     if (!req.session.usuario) {
         return res.redirect('/login')
@@ -58,9 +74,31 @@ app.get('/transacoes', (req, res) => {
             return res.send("Erro ao buscar transações")
         }
 
-        res.render('transacoes', {
-            usuario: req.session.usuario,
-            transacoes: results
+        db.query(`SELECT
+            SUM(CASE WHEN tipo = 'entrada' THEN valor ELSE 0 END) - SUM(CASE WHEN tipo = 'saida' THEN valor ELSE 0 END) AS saldo
+            FROM transacoes WHERE usuario_id = ?`, 
+        [usuarioId],
+        (err, resultadoSaldo) => {
+            if(err){
+                console.log(err)
+                return res.send("erro ao calcular saldo :/")
+            }
+            
+            const saldo = resultadoSaldo[0].saldo || 0
+
+            db.query('SELECT nome FROM categorias ORDER BY nome', (err, categorias) => {
+               if (err) {
+                console.log(err)
+                return res.send("Erro ao buscar categorias")
+                } 
+
+                res.render('transacoes', {
+                    usuario: req.session.usuario,
+                    transacoes: results,
+                    saldo: saldo,
+                    categorias
+                })
+            })
         })
     })
 })
@@ -90,5 +128,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('Rodando na porta:${port}')
+    console.log(`Rodando na porta: ${port}`)
 })
