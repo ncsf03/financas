@@ -1,15 +1,18 @@
 <%- include('partials/header', {titulo: 'Minhas transações'}) %>
 
 <h2>Olá, <%= usuario.usuario %></h2>
-<h3>Saldo atual: R$ <%= Number(saldo).toFixed(2) %></h3>
+
+<p><strong>Saldo atual: R$ <%= Number(saldo).toFixed(2) %></strong></p>
+
 <form action="/transacoes" method="POST">
-  <select name="tipo" required>
+  <select name="tipo" class="form-input" required>
     <option value="entrada">Entrada</option>
     <option value="saida">Saída</option>
   </select>
   <input type="number" step="0.01" name="valor" placeholder="Valor" required>
   <input type="text" name="categoria" list="categorias" placeholder="Categoria (opcional)">
   <input type="text" name="descricao" placeholder="Descrição (opcional)">
+
   <datalist id="categorias">
     <% categorias.forEach(c => { %>
       <option value="<%= c.nome %>">
@@ -37,7 +40,12 @@
   <% }) %>
 </table>
 
+<div class="footer-actions">
+  <a href="/logout" class="btn-logout">Sair</a>
+</div>
 <br>
-<a href="/logout">Sair</a>
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="/script/dashboard.js"></script>
 
 <%- include('partials/footer') %>

@@ -3,7 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title><%= titulo %></title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+  <button id="toggle-theme" style="position: fixed; top: 20px; right: 20px;">🌓</button>
+
+  <script>
+    const themeBtn = document.getElementById('toggle-theme');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+  
+  <div id="loading">
+    <div class="loader"></div>
+  </div>
+  
+  <script>
+    // Esconde o loading depois que a página termina de carregar
+    window.addEventListener("load", () => {
+      document.getElementById("loading").style.display = "none";
+    });
+  </script>
+  
 
     <h1>SISTEMA DE CONTROLE</h1>

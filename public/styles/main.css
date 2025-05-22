@@ -1,0 +1,158 @@
+:root {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --box-color: #1e1e1e;
+    --input-bg: #2a2a2a;
+    --link-color: #66ccff;
+    --accent: #0066cc;
+    --accent-hover: #004999;
+    --border-color: #2a2a2a;
+  }
+  
+  /* Modo claro */
+  [data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --text-color: #222;
+    --box-color: #ffffff;
+    --input-bg: #e0e0e0;
+    --link-color: #0066cc;
+    --accent: #0066cc;
+    --accent-hover: #004999;
+    --border-color: #ccc;
+  }
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  /* Cabeçalhos */
+  h1, h2, h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  /* Formulário */
+  form {
+    margin-bottom: 30px;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    animation: fadeIn 0.8s ease;
+  }
+  
+  input, select, button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  input, select {
+    background-color: #2a2a2a;
+    color: #fff;
+  }
+  
+  button {
+    background-color: #0066cc;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #004999;
+  }
+  
+  /* Tabela */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #2a2a2a;
+    text-align: left;
+    color: #ffffff;
+  }
+  
+  th {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #1e1e1e;
+  }
+  
+  tr:hover {
+    background-color: #333;
+  }
+  
+  /* Links */
+  a {
+    color: #66ccff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Animação fadeIn */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Loading */
+  #loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .loader {
+    border: 6px solid #333;
+    border-top: 6px solid #66ccff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
